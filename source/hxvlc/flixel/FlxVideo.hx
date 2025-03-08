@@ -19,12 +19,12 @@ using StringTools;
  *
  * ```haxe
  * final video:FlxVideo = new FlxVideo();
- * video.onEndReached.add(function():Void
+ * video.finishCallback = function():Void
  * {
  * 	video.dispose();
  *
  * 	FlxG.removeChild(video);
- * });
+ * };
  * FlxG.addChildBelowMouse(video);
  *
  * if (video.load('assets/videos/video.mp4'))
