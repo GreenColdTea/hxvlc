@@ -130,8 +130,6 @@ class FlxVideo extends Video
 							catch (e:Dynamic)
 							{
 								throw 'Error loading asset bytes from location "$location": $e';
-
-								return false;
 							}
 						}
 					}
@@ -141,8 +139,6 @@ class FlxVideo extends Video
 				else
 				{
 					throw 'Unable to find the video file at location "$location".';
-
-					return false;
 				}
 			}
 		}
@@ -155,6 +151,8 @@ class FlxVideo extends Video
 	 */
 	public override function dispose():Void
 	{
+                stop();
+		
 		if (FlxG.signals.focusGained.has(onFocusGained))
 			FlxG.signals.focusGained.remove(onFocusGained);
 
@@ -172,8 +170,19 @@ class FlxVideo extends Video
 			FlxG.signals.postUpdate.remove(onVolumeUpdate);
 		#end
 
+		resumeOnFocus = false;
+
 		super.dispose();
 	}
+
+	/**
+        * Stopping the video player and return video positions.
+        */
+        public function stop():Void
+        {
+             pause();
+             setTime(0);
+        }
 
 	@:noCompletion
 	private function onGameResized(width:Int, height:Int):Void
