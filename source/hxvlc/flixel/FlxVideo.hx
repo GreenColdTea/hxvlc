@@ -202,10 +202,10 @@ class FlxVideo extends Video
 
 	public override function update():Void
 	{
-		if (video != null && video.canSkip)
+		if (video != null && canSkip && (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end))
                 {
-                      video.skipVideo();
-                }
+                      skipVideo();
+		}
 	}
 
 	@:noCompletion
