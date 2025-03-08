@@ -46,7 +46,7 @@ class FlxVideo extends Video
 	/**
         * Function that calling if video is finished.
         */
-        public var finishCallback:Void->Void = null;
+        public var finishCallback:Null<Void->Void> = null;
 
 	/**
 	 * Internal tracker for whether the video is paused or not.
