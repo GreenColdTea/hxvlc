@@ -49,6 +49,11 @@ class FlxVideo extends Video
         public var finishCallback:Null<Void->Void> = null;
 
 	/**
+        * Can we skip this video, please?
+        */
+	public var canSkip:Bool = true;
+
+	/**
 	 * Internal tracker for whether the video is paused or not.
 	 */
 	@:noCompletion
@@ -196,7 +201,11 @@ class FlxVideo extends Video
 	     if (this.time != 0) {
 		     this.time = 0;
 	     }
-		     
+
+	     if (canSkip && (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end))
+             {
+                     skipVideo();
+             }
         }
 
 	@:noCompletion
@@ -258,6 +267,15 @@ class FlxVideo extends Video
 		if (volume != currentVolume)
 			volume = currentVolume;
 	}
+
+	public function skipVideo():Void
+        {
+                if (!canSkip) return;
+
+                stop();
+                if (finishCallback != null)
+                        finishCallback();
+        }
 
 	@:noCompletion
 	private function set_volumeAdjust(value:Float):Float
