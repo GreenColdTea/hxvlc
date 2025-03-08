@@ -446,6 +446,11 @@ class Video extends openfl.display.Bitmap
 		Handle.init();
 	}
 
+	public function update():Void
+	{
+		//do nothing lol
+	}
+
 	/**
 	 * Loads media from the specified location.
 	 *
