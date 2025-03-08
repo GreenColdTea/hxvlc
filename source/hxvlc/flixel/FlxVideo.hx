@@ -198,7 +198,15 @@ class FlxVideo extends Video
                        togglePaused();
 
                 time = 0;
-        }
+	}
+
+	public override function update():Void
+	{
+		if (video != null && video.canSkip)
+                {
+                      video.skipVideo();
+                }
+	}
 
 	@:noCompletion
 	private function onGameResized(width:Int, height:Int):Void
