@@ -178,10 +178,14 @@ class FlxVideo extends Video
 	/**
         * Stopping the video player and return video positions.
         */
-        public function stop():Void
+        public override function stop():Void
         {
              pause();
-             setTime(0);
+
+	     if (this.time != 0) {
+		     this.time = 0;
+	     }
+		     
         }
 
 	@:noCompletion
