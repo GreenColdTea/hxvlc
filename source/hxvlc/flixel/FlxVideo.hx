@@ -44,6 +44,11 @@ class FlxVideo extends Video
 	public var resizeMode(default, set):FlxAxes = FlxAxes.XY;
 
 	/**
+        * Function that calling if video is finished.
+        */
+        public var finishCallback:Void->Void = null;
+
+	/**
 	 * Internal tracker for whether the video is paused or not.
 	 */
 	@:noCompletion
@@ -83,6 +88,13 @@ class FlxVideo extends Video
 
 			onGameResized(FlxG.stage.stageWidth, FlxG.stage.stageHeight);
 		});
+		onEndReached.add(function():Void
+                {
+                        if (finishCallback != null)
+                                finishCallback();
+
+                        dispose();
+                });
 	}
 
 	/**
