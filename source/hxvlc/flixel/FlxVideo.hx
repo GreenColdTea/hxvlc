@@ -199,7 +199,7 @@ class FlxVideo extends Video
                 time = 0;
 	}
 
-	public function update():Void
+	public override function update():Void
 	{
 		if (canSkip != null && (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end))
                 {
