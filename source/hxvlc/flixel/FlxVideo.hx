@@ -194,18 +194,19 @@ class FlxVideo extends Video
         */
         public override function stop():Void
         {
-                if (isPlaying())
-                       togglePaused();
+                togglePaused();
 
                 time = 0;
 	}
 
-	public override function update():Void
+	public function update():Void
 	{
-		if (video != null && canSkip && (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end))
+		if (canSkip != null && (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end))
                 {
                       skipVideo();
 		}
+
+		super.update();
 	}
 
 	@:noCompletion
@@ -288,11 +289,6 @@ class FlxVideo extends Video
 
 		return volumeAdjust = value;
 	}
-
-	public function isPlaying():Bool
-        {
-                return this.state == LibVLC_State.Playing;
-        }
 
 	@:noCompletion
 	private function set_resizeMode(value:FlxAxes):FlxAxes
