@@ -93,7 +93,6 @@ class FlxVideo extends Video
                         if (finishCallback != null)
                                 finishCallback();
 
-                        dispose();
                 });
 	}
 
