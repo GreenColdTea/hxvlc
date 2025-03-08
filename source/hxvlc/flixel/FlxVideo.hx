@@ -167,8 +167,6 @@ class FlxVideo extends Video
 	 */
 	public override function dispose():Void
 	{
-                stop();
-		
 		if (FlxG.signals.focusGained.has(onFocusGained))
 			FlxG.signals.focusGained.remove(onFocusGained);
 
@@ -192,20 +190,14 @@ class FlxVideo extends Video
 	}
 
 	/**
-        * Stopping the video player and return video positions.
+        * Stopping the video player and resetting the position.
         */
         public override function stop():Void
         {
-             pause();
+                if (isPlaying())
+                       togglePaused();
 
-	     if (this.time != 0) {
-		     this.time = 0;
-	     }
-
-	     if (canSkip && (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end))
-             {
-                     skipVideo();
-             }
+                time = 0;
         }
 
 	@:noCompletion
@@ -288,6 +280,11 @@ class FlxVideo extends Video
 
 		return volumeAdjust = value;
 	}
+
+	public function isPlaying():Bool
+        {
+                return this.state == LibVLC_State.Playing;
+        }
 
 	@:noCompletion
 	private function set_resizeMode(value:FlxAxes):FlxAxes
