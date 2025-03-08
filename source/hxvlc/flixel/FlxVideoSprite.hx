@@ -144,7 +144,7 @@ class FlxVideoSprite extends FlxSprite
 							}
 							catch (e:Dynamic)
 							{
-								FlxG.log.error('Error loading asset bytes from location "$location": $e');
+								throw 'Error loading asset bytes from location "$location": $e';
 
 								return false;
 							}
@@ -155,7 +155,7 @@ class FlxVideoSprite extends FlxSprite
 				}
 				else
 				{
-					FlxG.log.warn('Unable to find the video file at location "$location".');
+					throw 'Unable to find the video file at location "$location".';
 
 					return false;
 				}
